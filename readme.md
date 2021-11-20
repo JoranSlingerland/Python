@@ -11,6 +11,6 @@ Some pyhton projects i've started to try and learn pyhton
 
 ## Guessing Game
 
--TODO make leaderboard persistent
--TODO add different hints
--TODO empty input breaks it
+- TODO make leaderboard persistent
+- TODO add different hints
+- TODO empty input breaks it
