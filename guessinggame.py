@@ -11,13 +11,13 @@ score = int(100)
 
 #yes or no function
 def yes_or_no(question):
-    reply = str(input(question, " Do you want to play again (y/n)" ))
-    while reply == 'y'  or reply == 'n':
+    reply = input(question)
+    while reply != 'y'  or reply != 'n':
         if reply == 'y':
             return True
         if reply == 'n':
             return False 
-        reply = str(input(question, " Do you want to play again (y/n)" ))
+        reply = input(question)
 
 #Scoring function
 def scoring_function(score):
@@ -31,12 +31,12 @@ def high_Or_Low(guess, score, random_number):
         print("You guessed to high, Try again!")
         score, scoresubstraction = scoring_function(score)
         print("Your score is now ", score, " you lost " , scoresubstraction, " points" )
-        guess = int(input("Guess a number between 1 and 100: "))
+        guess = int(input("Guess a number between " + str(random_number_low) + " and " + str(random_number_high) + ": "))
     elif guess < random_number:
         print("You guessed to low, Try again!")
         score, scoresubstraction = scoring_function(score)
         print("Your score is now ", score, " you lost " , scoresubstraction, " points" )
-        guess = int(input("Guess a number between 1 and 100: "))     
+        guess = int(input("Guess a number between " + str(random_number_low) + " and " + str(random_number_high) + ": "))  
     return guess , score
 
 
@@ -46,7 +46,7 @@ def main(random_number_low, random_number_high, score):
     print("In this game you will be asked to gues a number between ", random_number_low, " and ", random_number_high, ".\nYou will start with a score and everytime you gues wrong you will lose between 0 and 10 points. \nGood luck!")
     #get Initial information
     username = str(input("please input your name for the leaderboard: "))
-    guess = int(input("Guess a number between 1 and 100: "))
+    guess = int(input("Guess a number between " + str(random_number_low) + " and " + str(random_number_high) + ": "))
     random_number = random.randint(random_number_low, random_number_high)
 
     #loop through guesses
@@ -55,13 +55,12 @@ def main(random_number_low, random_number_high, score):
     if guess == random_number:
         print("You guessed it! Your score was: ", score)
 
-    # if yes_or_no("Do you want to play again") == True:
-    #     score = int(100)
-    #     main(random_number_low, random_number_high, score)
+    if yes_or_no("Do you want to play again (y/n)") == True:
+        score = int(100)
+        main(random_number_low, random_number_high, score)
 
 #call main
 main(random_number_low, random_number_high, score)
 
-#TODO Play game again
 #TODO add leaderbord
 #TODO add different hints
