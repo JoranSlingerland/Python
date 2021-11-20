@@ -73,7 +73,3 @@ def main(random_number_low, random_number_high, score, scoreboard):
 
 #call main
 main(RANDOM_NUMBER_LOW, RANDOM_NUMBER_HIGH, SCORE, SCOREBOARD)
-
-#TODO make leaderboard persistent
-#TODO add different hints
-#TODO empty input breaks it
