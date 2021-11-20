@@ -1,4 +1,4 @@
-# Pyhton projects
+# Pyyhon projects
 
 Some pyhton projects i've started to try and learn pyhton
 
