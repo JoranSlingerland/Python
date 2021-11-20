@@ -1,11 +1,14 @@
+#!/user/bin/env python
+"""This is a small game that will ask you to gues a number"""
+
 #Import modules
 import random
 
 #initiate paramaters
-random_number_low = int(1)
-random_number_high = int(5)
-score = int(100)
-scoreboard = {}
+RANDOM_NUMBER_LOW = int(1)
+RANDOM_NUMBER_HIGH = int(5)
+SCORE = int(100)
+SCOREBOARD = {}
 
 ###Functions###
 
@@ -21,7 +24,7 @@ def yes_or_no(question):
         if reply == 'y':
             return True
         if reply == 'n':
-            return False 
+            return False
         reply = input(question)
 
 #Scoring function
@@ -31,7 +34,7 @@ def scoring_function(score):
     return score, scoresubstraction
 
 #higher or lower function
-def high_Or_Low(guess, score, random_number):
+def high_or_Low(guess, score, random_number, random_number_low, random_number_high):
     if guess > random_number:
         print("You guessed to high, Try again!")
         score, scoresubstraction = scoring_function(score)
@@ -41,7 +44,7 @@ def high_Or_Low(guess, score, random_number):
         print("You guessed to low, Try again!")
         score, scoresubstraction = scoring_function(score)
         print("Your score is now ", score, " you lost " , scoresubstraction, " points" )
-        guess = int(input("Guess a number between " + str(random_number_low) + " and " + str(random_number_high) + ": "))  
+        guess = int(input("Guess a number between " + str(random_number_low) + " and " + str(random_number_high) + ": "))
     return guess , score
 
 
@@ -56,20 +59,20 @@ def main(random_number_low, random_number_high, score, scoreboard):
 
     #loop through guesses
     while guess != random_number:
-        guess, score = high_Or_Low(guess, score, random_number)
+        guess, score = high_or_Low(guess, score, random_number, random_number_low, random_number_high)
     if guess == random_number:
         scoreboard, scoreboard_sorted = update_scoreboard(scoreboard, score, username)
         print("You guessed it! Your score was: ", score, "\nThe scoreboard is now:")
         for i in scoreboard_sorted:
             print(i[0], i[1])
-        
-        if yes_or_no("Do you want to play again (y/n)") == True:
+
+        if yes_or_no("Do you want to play again (y/n)") is True:
             score = int(100)
             main(random_number_low, random_number_high, score, scoreboard)
-        
+
 
 #call main
-main(random_number_low, random_number_high, score, scoreboard)
+main(RANDOM_NUMBER_LOW, RANDOM_NUMBER_HIGH, SCORE, SCOREBOARD)
 
 #TODO make leaderboard persistent
 #TODO add different hints
