@@ -18,7 +18,6 @@ def update_scoreboard(scoreboard, score, username):
     scoreboard_sorted = sorted(scoreboard.items(), key=lambda x: x[1], reverse=True)
     return scoreboard, scoreboard_sorted
 
-#yes or no function
 def yes_or_no(question):
     """Asks yes or no question"""
     reply = input(question)
@@ -29,43 +28,35 @@ def yes_or_no(question):
             return False
         reply = input(question)
 
-#Scoring function
 def scoring_function(score):
     """Update the score"""
     scoresubstraction = random.randint(0, 10)
     score = score -scoresubstraction
     return score, scoresubstraction
 
-#higher or lower function
 def high_or_low(guess, score, random_number, random_number_low, random_number_high):
     """Checks if the guess is higher or lower"""
     if guess > random_number:
         print("You guessed to high, Try again!")
         score, scoresubstraction = scoring_function(score)
-        print("Your score is now ", score, " you lost " , scoresubstraction, " points" )
-        guess = int(input("Guess a number between " + str(random_number_low)
-        + " and " + str(random_number_high) + ": "))
+        print(f"Your score is now {score} you lost {scoresubstraction} points")
+        guess = int(input(f"Guess a number between {random_number_low} and {random_number_high}: "))
     elif guess < random_number:
         print("You guessed to low, Try again!")
         score, scoresubstraction = scoring_function(score)
-        print("Your score is now ", score, " you lost " , scoresubstraction, " points" )
-        guess = int(input("Guess a number between " + str(random_number_low)
-        + " and " + str(random_number_high) + ": "))
+        print(f"Your score is now {score} you lost {scoresubstraction} points")
+        guess = int(input(f"Guess a number between {random_number_low} and {random_number_high}: "))
     return guess , score
 
-
-#main function
 def main(random_number_low, random_number_high, score, scoreboard):
     """Main function"""
     #intro to the game
-    print("In this game you will be asked to gues a number between ",
-    random_number_low, " and ", random_number_high,
-    ".\nYou will start with a score and everytime you gues wrong you",
-    "will lose between 0 and 10 points. \nGood luck!")
+    print("In this game you will be asked to gues a number between"
+    f" {random_number_low} and {random_number_high}.\nYou will start with a score and every time"
+    " you gues wrong you will lose between 0 and 10 points. \nGood luck!")
     #get Initial information
     username = str(input("please input your name for the leaderboard: "))
-    guess = int(input("Guess a number between " + str(random_number_low)
-     + " and " + str(random_number_high) + ": "))
+    guess = int(input(f"Guess a number between {random_number_low} and {random_number_high}: "))
     random_number = random.randint(random_number_low, random_number_high)
 
     #loop through guesses
@@ -74,7 +65,7 @@ def main(random_number_low, random_number_high, score, scoreboard):
         random_number_low, random_number_high)
     if guess == random_number:
         scoreboard, scoreboard_sorted = update_scoreboard(scoreboard, score, username)
-        print("You guessed it! Your score was: ", score, "\nThe scoreboard is now:")
+        print(f"You guessed it! Your score was: {score}\nThe scoreboard is now:")
         for i in scoreboard_sorted:
             print(i[0], i[1])
 
