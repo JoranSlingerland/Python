@@ -3,14 +3,19 @@
 
 #Import modules
 import random
-
-#initiate paramaters
-RANDOM_NUMBER_LOW = int(1)
-RANDOM_NUMBER_HIGH = int(5)
-SCORE = int(100)
-SCOREBOARD = {}
+import json
 
 ###Functions###
+def write_dict_to_json(scoreboard, filename):
+    """Write data to file"""
+    with open(filename, "w+", encoding="utf-8") as filename:
+        json.dump(scoreboard, filename)
+
+def read_file(filename):
+    """Read data from file"""
+    with open(filename, encoding="utf-8") as file:
+        file.read(filename)
+    return file
 
 def update_scoreboard(scoreboard, score, username):
     """Updates scoreboard"""
@@ -48,12 +53,16 @@ def high_or_low(guess, score, random_number, random_number_low, random_number_hi
         guess = int(input(f"Guess a number between {random_number_low} and {random_number_high}: "))
     return guess , score
 
-def main(random_number_low, random_number_high, score, scoreboard):
+def main(scoreboard, random_number_low = 1, random_number_high = 5, score = 100):
     """Main function"""
+    #temp variables
+    scoreboard_filename = 'scoreboard.json'
+
     #intro to the game
     print("In this game you will be asked to gues a number between"
     f" {random_number_low} and {random_number_high}.\nYou will start with a score and every time"
     " you gues wrong you will lose between 0 and 10 points. \nGood luck!")
+
     #get Initial information
     username = str(input("please input your name for the leaderboard: "))
     guess = int(input(f"Guess a number between {random_number_low} and {random_number_high}: "))
@@ -69,11 +78,12 @@ def main(random_number_low, random_number_high, score, scoreboard):
         for i in scoreboard_sorted:
             print(i[0], i[1])
 
-        if yes_or_no("Do you want to play again (y/n)") is True:
-            score = int(100)
-            main(random_number_low, random_number_high, score, scoreboard)
+        if yes_or_no("Do you want to play again? (y/n)") is True:
+            main(scoreboard)
+        if yes_or_no("Do you want to save the scoreboard? (y/n)") is True:
+            write_dict_to_json(scoreboard, scoreboard_filename)
 
 
 #call main
 if __name__ == '__main__':
-    main(RANDOM_NUMBER_LOW, RANDOM_NUMBER_HIGH, SCORE, SCOREBOARD)
+    main(scoreboard = {},)
