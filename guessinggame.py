@@ -75,4 +75,5 @@ def main(random_number_low, random_number_high, score, scoreboard):
 
 
 #call main
-main(RANDOM_NUMBER_LOW, RANDOM_NUMBER_HIGH, SCORE, SCOREBOARD)
+if __name__ == '__main__':
+    main(RANDOM_NUMBER_LOW, RANDOM_NUMBER_HIGH, SCORE, SCOREBOARD)
