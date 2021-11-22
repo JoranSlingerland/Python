@@ -11,11 +11,11 @@ def write_dict_to_json(scoreboard, filename):
     with open(filename, "w+", encoding="utf-8") as file:
         json.dump(scoreboard, file)
 
-def read_file(filename):
+def write_jsonfile_to_dict(filename):
     """Read data from file"""
-    with open(filename, encoding="utf-8") as file:
-        file.read(filename)
-    return file
+    with open(filename, encoding='utf-8') as json_file:
+        data = json.load(json_file)
+    return data
 
 def update_scoreboard(scoreboard, score, username):
     """Updates scoreboard"""
@@ -53,15 +53,27 @@ def high_or_low(guess, score, random_number, random_number_low, random_number_hi
         guess = int(input(f"Guess a number between {random_number_low} and {random_number_high}: "))
     return guess , score
 
-def main(scoreboard, input_random_number_low = 1, input_random_number_high = 5, input_score = 100):
+def main(scoreboard_filename = 'scoreboard.json', input_random_number_low = 1,
+input_random_number_high = 5, input_score = 100):
     """Main function"""
-    #temp variables
-    scoreboard_filename = 'scoreboard.json'
 
     #intro to the game
     print("In this game you will be asked to gues a number between"
     f" {input_random_number_low} and {input_random_number_high}.\nYou will start with a score and"
     " every time you gues wrong you will lose between 0 and 10 points. \nGood luck!")
+
+    #import previous scoreboard
+    if yes_or_no("Do you want to import a previous scoreboard (y/n)") is True:
+        scoreboard = write_jsonfile_to_dict(scoreboard_filename)
+        if scoreboard is None:
+            print("No scoreboard was found")
+        else:
+            scoreboard_sorted = sorted(scoreboard.items(), key=lambda x: x[1], reverse=True)
+            print("scoreboard is imported:")
+            for i in scoreboard_sorted:
+                print(i[0], i[1])
+    else:
+        scoreboard = {}
 
     playing = True
 
@@ -96,4 +108,4 @@ def main(scoreboard, input_random_number_low = 1, input_random_number_high = 5, 
 
 #call main
 if __name__ == '__main__':
-    main(scoreboard = {},)
+    main()
