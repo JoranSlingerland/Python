@@ -8,8 +8,8 @@ import json
 ###Functions###
 def write_dict_to_json(scoreboard, filename):
     """Write data to file"""
-    with open(filename, "w+", encoding="utf-8") as filename:
-        json.dump(scoreboard, filename)
+    with open(filename, "w+", encoding="utf-8") as file:
+        json.dump(scoreboard, file)
 
 def read_file(filename):
     """Read data from file"""
