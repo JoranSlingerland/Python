@@ -9,6 +9,7 @@ Some pyhton projects i've started to try and learn pyhton
 - Buk SSH commands
 - Stock Tracker
 - netmiko
+- Spotify stats
 
 ## Guessing Game
 
