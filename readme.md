@@ -10,6 +10,7 @@ Some pyhton projects i've started to try and learn pyhton
 - Stock Tracker
 - netmiko
 - Spotify stats
+- Strava API
 
 ## Guessing Game
 
